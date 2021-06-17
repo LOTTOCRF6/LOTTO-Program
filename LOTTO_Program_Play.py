@@ -1,277 +1,126 @@
 
 from tkinter import *
-from random import randint
 import random
-import datetime
 from tkinter import messagebox
 
-import self
+
+def verify():
+    pass
+
 
 root = Tk()
-root.title("Let`s Play")
-root.geometry("600x600")
-root.config(bg="grey")
+root.title("Lotto Draw")
+root.geometry("700x436")
+root.config(background="Grey")
+root.resizable(0, 0)
+
+img = PhotoImage(file="crf.png")
+canvas = Canvas(root, width=1200, height=800)
+canvas.create_image(0, 0, anchor=NW, image=img)
+canvas.pack()
+
+play = Label(root, text="Are you ready 'Play' :", font=("bold", 12), bg="Grey", fg="white")
+play.place(x=150, y=30)
+
+num1 = IntVar()
+num2 = IntVar()
+num3 = IntVar()
+num4 = IntVar()
+num5 = IntVar()
+num6 = IntVar()
+
+txt1 = Spinbox(root, from_=1, to=49, textvariable=num1, width=2, font=("bold", 20), bg="black", fg="white")
+txt1.place(x=50, y=90)
+txt2 = Spinbox(root, from_=1, to=49, textvariable=num2, width=2, font=("bold", 20), bg="black", fg="white")
+txt2.place(x=150, y=90)
+txt3 = Spinbox(root, from_=1, to=49, textvariable=num3, width=2, font=("bold", 20), bg="black", fg="white")
+txt3.place(x=250, y=90)
+txt4 = Spinbox(root, from_=1, to=49, textvariable=num4, width=2, font=("bold", 20), bg="black", fg="white")
+txt4.place(x=350, y=90)
+txt5 = Spinbox(root, from_=1, to=49, textvariable=num5, width=2, font=("bold", 20), bg="black", fg="white")
+txt5.place(x=450, y=90)
+txt6 = Spinbox(root, from_=1, to=49, textvariable=num6, width=2, font=("bold", 20), bg="black", fg="white")
+txt6.place(x=550, y=90)
+result_answer = Label(root, width=50, height=8, bg="black", fg="white")
+result_answer.place(x=130, y=150)
 
 
-class Numbers():
-
-    def __init__(self,master):
-
-
-        self.result = Entry(master, borderwidth=5, relief=SUNKEN)
-        self.result.grid(row=0, column=0, columnspan=6, pady=5)
-        self.result.config(font=("Arial", 18))
-        self.result.focus_set()  # Sets focus on the input text area
-        # Entry 2
-        self.lotto_numbers = Label(master, text="Lotto No.", bg='Light green')
-        self.lotto_numbers.grid(row=8, column=0)
-        self.lotto_num = Entry(master, borderwidth=5, relief=SUNKEN)
-        self.lotto_num.grid(row=8, column=-0, columnspan=6, pady=5)
-        self.lotto_num.config(font=("Arial", 18))
-        self.result_lab = Label(master, text="Lotto Result", bg='light green')
-        self.result_lab.grid(row=9, column=0)
-        self.lotto_result = Entry(master, borderwidth=5, relief=SUNKEN)
-        self.lotto_result.grid(row=9, column=0, columnspan=6, pady=5)
-        self.lotto_result.config(font=("Arial", 18))
-
-        # Buttons
-        self.button1 = Button(root, text="0", width=3, command=lambda: self.ins('0, '), relief=RAISED, bg='light green')
-        self.button1.grid(row=1, column=0, padx=3, pady=3)
-        self.button1.config(font=("Arial", 18))
-
-        self.button2 = Button(master, text="1", width=3, command=lambda: self.ins('1, '), relief=RAISED, bg='light green')
-        self.button2.grid(row=1, column=1, padx=3, pady=3)
-        self.button2.config(font=("Arial", 18))
-
-        self.button3 = Button(master, text="2", width=3, command=lambda:self.ins('2, '),relief=RAISED,bg='light green')
-        self.button3.grid(row=1, column=2, padx=3, pady=3)
-        self.button3.config(font=("Arial", 18))
-
-        self.button4 = Button(master, text="3", width=3, command=lambda:self.ins('3, '),relief=RAISED,bg='light green')
-        self.button4.grid(row=1, column=3, padx=3, pady=3)
-        self.button4.config(font=("Arial", 18))
-
-        self.button5 = Button(master, text="4", width=3, command=lambda:self.ins('4, '),relief=RAISED,bg='light green')
-        self.button5.grid(row=1, column=4, padx=3, pady=3)
-        self.button5.config(font=("Arial", 18))
-
-        self.button6 = Button(master, text="5", width=3, command=lambda:self.ins('5, '),relief=RAISED,bg='light green')
-        self.button6.grid(row=1, column=5, padx=3, pady=3)
-        self.button6.config(font=("Arial", 18))
-
-        self.button7 = Button(master, text="6", width=3, command=lambda:self.ins('6, '),relief=RAISED,bg='light green')
-        self.button7.grid(row=1, column=6, padx=3, pady=3)
-        self.button7.config(font=("Arial", 18))
-
-        self.button8 = Button(master, text="7", width=3, command=lambda:self.ins('7, '),relief=RAISED,bg='light green')
-        self.button8.grid(row=1, column=7, padx=3, pady=3)
-        self.button8.config(font=("Arial", 18))
-
-        self.button9 = Button(master, text="8", width=3, command=lambda:self.ins('8, '),relief=RAISED,bg='light green')
-        self.button9.grid(row=2, column=0, padx=3, pady=3)
-        self.button9.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="9", width=3, command=lambda: self.ins('9, '),relief=RAISED,bg='light green')
-        self.button0.grid(row=2, column=1, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="10", width=3, command=lambda: self.ins('10, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=2, column=2, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="11", width=3, command=lambda: self.ins('11, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=2, column=3, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="12", width=3, command=lambda: self.ins('12, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=2, column=4, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="13", width=3, command=lambda: self.ins('13, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=2, column=5, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="14", width=3, command=lambda: self.ins('14, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=2, column=6, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master, text="15", width=3, command=lambda: self.ins('15, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=2, column=7, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.button0 = Button(master,text="16", width=3, command=lambda: self.ins('16, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=0, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="17", width=3, command=lambda: self.ins('17, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=1, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="18", width=3, command=lambda: self.ins('18, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=2, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="19", width=3, command=lambda: self.ins('19, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=3, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="20", width=3, command=lambda: self.ins('20, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=4, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="21", width=3, command=lambda: self.ins('21, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=5, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="22", width=3, command=lambda: self.ins('22, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=6, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="23", width=3, command=lambda: self.ins('23, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=3, column=7, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="24", width=3, command=lambda: self.ins('24, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=0, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="25", width=3, command=lambda: self.ins('25, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=1, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="26", width=3, command=lambda: self.ins('26, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=2, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="27", width=3, command=lambda: self.ins('27, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=3, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="28", width=3, command=lambda: self.ins('28, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=4, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="29", width=3, command=lambda: self.ins('29, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=5, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="30", width=3, command=lambda: self.ins('30, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=6, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="31", width=3, command=lambda: self.ins('31, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=4, column=7, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="32", width=3, command=lambda: self.ins('32, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=0, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="33", width=3, command=lambda: self.ins('33, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=1, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="34", width=3, command=lambda: self.ins('34, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=2, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="35", width=3, command=lambda: self.ins('35, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=3, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="36", width=3, command=lambda: self.ins('36, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=4, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="37", width=3, command=lambda: self.ins('37, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=5, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="38", width=3, command=lambda: self.ins('38, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=6, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="39", width=3, command=lambda: self.ins('39, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=5, column=7, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="40", width=3, command=lambda: self.ins('40, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=0, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="41", width=3, command=lambda: self.ins('41, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=1, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="42", width=3, command=lambda: self.ins('42, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=2, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="43", width=3, command=lambda: self.ins('43, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=3, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="44", width=3, command=lambda: self.ins('44, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=4, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="45", width=3, command=lambda: self.ins('45, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=5, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="46", width=3, command=lambda: self.ins('46, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=6, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="47", width=3, command=lambda: self.ins('47, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=6, column=7, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="48", width=3, command=lambda: self.ins('48, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=7, column=0, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-        self.button0 = Button(master, text="49", width=3, command=lambda: self.ins('49, '), relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=7, column=1, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        # Operations Buttons
-        self.button0 = Button(master, text="Play", width=3, command=self.play, relief=RAISED,
-                              bg='light green')
-        self.button0.grid(row=0, column=5, padx=3, pady=3)
-        self.button0.config(font=("Arial", 18))
-
-        self.empty = []
-        self.num = self.result.get()
-        self.ran_numbers = random.sample(range(0,49), 6)
-
-    def ins(self, val):
-        self.result.insert(END, val)
-
-    def cancel(self):
-        self.result.delete(0, 'end')
-
-    def delete_all(self):
-        x = self.result.get()
-        self.result.delete(0, 'end')
-        y = x[:-1]
-        self.result.insert(0, y)
-
-    def play(self):
-
-        for i in self.ran_numbers:
-            if i in str(self.result.get()):
-                self.empty.append(i)
-        self.lotto_num.insert(0, self.ran_numbers)
+def exit_application():
+    msgbox = messagebox.askquestion('Exit Application', 'Are you sure you want to exit the application', icon='warning')
+    if msgbox == 'yes':
+        root.destroy()
 
 
-y = Numbers(root)
+def claim():
+    messagebox.showinfo("Alert", "Thank you for playing")
+    root.destroy()
+
+
+def luck():
+    x = num1.get()
+    y = num2.get()
+    z = num3.get()
+    a = num4.get()
+    b = num5.get()
+    c = num6.get()
+
+    my_list = [int(x), int(y), int(z), int(a), int(b), int(c)]
+    my_list.sort()
+
+    todaylotto = sorted(random.sample(range(1, 49), 6))
+
+    if any(my_list) < 0 or any(my_list) > 49:
+        messagebox.showinfo("NOOO", "Follow the rules")
+        num1.delete(0, END)
+        num2.delete(0, END)
+        num3.delete(0, END)
+        num4.delete(0, END)
+        num5.delete(0, END)
+        num6.delete(0, END)
+
+    else:
+        messagebox.showinfo("hurray", "Get ready")
+
+        if len(todaylotto) == len(my_list):
+            same = set(todaylotto).intersection(set(my_list))
+            if len(same) == 6:
+                result_answer.config(
+                    text="Jackpot Hurray \n" + "You just got your self Price : R10, 000 000.00" + "\n Today Lotto Numbers are" + str(
+                        todaylotto))
+                claim_btn["state"] = "normal"
+            elif len(same) == 5:
+                result_answer.config(
+                    text="Felicitations" + "You got 5 numbers correct" + "\n With this Outstanding Achievement" + "You won yourself R8, 584.00" + "\n Today Lotto Numbers are" + str(
+                        todaylotto))
+                claim_btn["state"] = "normal"
+            elif len(same) == 4:
+                result_answer.config(
+                    text="Felicitations" + "You got 4 numbers correct" + "\n With this Meritorious Achievement" + "You won yourself R2, 384.00" + "\n Today Lotto Numbers are" + str(
+                        todaylotto))
+                claim_btn["state"] = "normal"
+            elif len(same) == 3:
+                result_answer.config(
+                    text="Felicitations" + "You got 3 numbers correct" + "\n With this Substantial Achievement" + "You won yourself R100.50" + "\n Today Lotto Numbers are" + str(
+                        todaylotto))
+                claim_btn["state"] = "normal"
+            elif len(same) == 2:
+                result_answer.config(
+                    text="Felicitations" + "You got 2 numbers correct" + "\n With this Adequate Achievement" + "You won yourself R20.00" + "\n Today Lotto Numbers are" + str(
+                        todaylotto))
+                claim_btn["state"] = "normal"
+            elif len(same) == 1:
+                messagebox.showinfo("RESULT",
+                                    "We are sorry you only got one correct lotto numbers are: " + str(todaylotto))
+            elif len(same) == 0:
+                messagebox.showinfo("RESULT", "Try again Lotto numbers : " + str(todaylotto))
+
+
+
+btn = Button(root, text="CHECK RESULTS", bg="black", fg="white", command=luck, borderwidth=5, width=15)
+btn.place(x=80, y=350)
+exit_btn = Button(root, text='Exit', bg='green', command=exit_application, borderwidth=5, width=10)
+exit_btn.place(x=500, y=350)
+claim_btn = Button(root, text='Claim Prize', bg='blue', command=claim, borderwidth=5, width=10)
+claim_btn.place(x=300, y=350)
 root.mainloop()
 

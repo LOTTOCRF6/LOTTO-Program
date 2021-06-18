@@ -9,18 +9,17 @@ def verify():
 
 
 root = Tk()
-root.title("Lotto Draw")
+root.title("National Lotto Draw")
 root.geometry("700x436")
 root.config(background="Grey")
 root.resizable(0, 0)
 
-img = PhotoImage(file="crf.png")
-canvas = Canvas(root, width=1200, height=800)
-canvas.create_image(0, 0, anchor=NW, image=img)
-canvas.pack()
+my_pic = PhotoImage(file = "crf.png")
+background = Label(root, image = my_pic).place(x=0, y=0)
 
-play = Label(root, text="Are you ready 'Play' :", font=("bold", 12), bg="Grey", fg="white")
-play.place(x=150, y=30)
+
+play = Label(root, text="Are you ready 'Play'", font=("bold", 15), bg="black", fg="white")
+play.place(x=220, y=10)
 
 num1 = IntVar()
 num2 = IntVar()
@@ -29,17 +28,29 @@ num4 = IntVar()
 num5 = IntVar()
 num6 = IntVar()
 
-txt1 = Spinbox(root, from_=1, to=49, textvariable=num1, width=2, font=("bold", 20), bg="black", fg="white")
+lab_range1 = Label(root, text="1-49", bg="black", fg="white")
+lab_range1.place(x=60, y=65)
+txt1 = Spinbox(root, from_=0, to=49, textvariable=num1, width=2, font=("Consolas 20 bold"), bg="black", fg="white")
 txt1.place(x=50, y=90)
-txt2 = Spinbox(root, from_=1, to=49, textvariable=num2, width=2, font=("bold", 20), bg="black", fg="white")
+lab_range2 = Label(root, text="1-49", bg="black", fg="white")
+lab_range2.place(x=160, y=65)
+txt2 = Spinbox(root, from_=0, to=49, textvariable=num2, width=2, font=("Consolas 20 bold"), bg="black", fg="white")
 txt2.place(x=150, y=90)
-txt3 = Spinbox(root, from_=1, to=49, textvariable=num3, width=2, font=("bold", 20), bg="black", fg="white")
+lab_range3 = Label(root, text="1-49", bg="black", fg="white")
+lab_range3.place(x=260, y=65)
+txt3 = Spinbox(root, from_=0, to=49, textvariable=num3, width=2, font=("Consolas 20 bold"), bg="black", fg="white")
 txt3.place(x=250, y=90)
-txt4 = Spinbox(root, from_=1, to=49, textvariable=num4, width=2, font=("bold", 20), bg="black", fg="white")
+lab_range4 = Label(root, text="1-49", bg="black", fg="white")
+lab_range4.place(x=360, y=65)
+txt4 = Spinbox(root, from_=0, to=49, textvariable=num4, width=2, font=("Consolas 20 bold"), bg="black", fg="white")
 txt4.place(x=350, y=90)
-txt5 = Spinbox(root, from_=1, to=49, textvariable=num5, width=2, font=("bold", 20), bg="black", fg="white")
+lab_range5 = Label(root, text="1-49", bg="black", fg="white")
+lab_range5.place(x=460, y=65)
+txt5 = Spinbox(root, from_=0, to=49, textvariable=num5, width=2, font=("Consolas 20 bold"), bg="black", fg="white")
 txt5.place(x=450, y=90)
-txt6 = Spinbox(root, from_=1, to=49, textvariable=num6, width=2, font=("bold", 20), bg="black", fg="white")
+lab_range6 = Label(root, text="1-49", bg="black", fg="white")
+lab_range6.place(x=560, y=65)
+txt6 = Spinbox(root, from_=0, to=49, textvariable=num6, width=2, font=("Consolas 20 bold"), bg="black", fg="white")
 txt6.place(x=550, y=90)
 result_answer = Label(root, width=50, height=8, bg="black", fg="white")
 result_answer.place(x=130, y=150)
@@ -54,6 +65,7 @@ def exit_application():
 def claim():
     messagebox.showinfo("Alert", "Thank you for playing")
     root.destroy()
+    import LOTTO_Program_Claim
 
 
 def luck():
@@ -71,12 +83,12 @@ def luck():
 
     if any(my_list) < 0 or any(my_list) > 49:
         messagebox.showinfo("NOOO", "Follow the rules")
-        num1.delete(0, END)
-        num2.delete(0, END)
-        num3.delete(0, END)
-        num4.delete(0, END)
-        num5.delete(0, END)
-        num6.delete(0, END)
+        txt1.delete(0, END)
+        txt2.delete(0, END)
+        txt3.delete(0, END)
+        txt4.delete(0, END)
+        txt5.delete(0, END)
+        txt6.delete(0, END)
 
     else:
         messagebox.showinfo("hurray", "Get ready")
@@ -113,14 +125,19 @@ def luck():
                                     "We are sorry you only got one correct lotto numbers are: " + str(todaylotto))
             elif len(same) == 0:
                 messagebox.showinfo("RESULT", "Try again Lotto numbers : " + str(todaylotto))
-
+                txt1.delete(0, END)
+                txt2.delete(0, END)
+                txt3.delete(0, END)
+                txt4.delete(0, END)
+                txt5.delete(0, END)
+                txt6.delete(0, END)
 
 
 btn = Button(root, text="CHECK RESULTS", bg="black", fg="white", command=luck, borderwidth=5, width=15)
 btn.place(x=80, y=350)
-exit_btn = Button(root, text='Exit', bg='green', command=exit_application, borderwidth=5, width=10)
+exit_btn = Button(root, text='Exit', bg='black', fg='white', command=exit_application, borderwidth=5, width=10)
 exit_btn.place(x=500, y=350)
-claim_btn = Button(root, text='Claim Prize', bg='blue', command=claim, borderwidth=5, width=10)
+claim_btn = Button(root, text='Claim Prize', bg='black', fg="white", command=claim, borderwidth=5, width=10)
 claim_btn.place(x=300, y=350)
 root.mainloop()
 

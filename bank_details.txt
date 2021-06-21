@@ -1,0 +1,46 @@
+Account Name:  Z Stihandathu
+
+Account Number:  3456721892
+
+Bank:  Capitec Bank
+
+Email:  sithandathuzipho@gmail.com
+
+Account Name:  Z Six
+
+Account Number:  3645278175
+
+Bank:  Capitec Bank
+
+Email:  stuurmanmzwandile@gmail.com
+
+Account Name:  
+
+Account Number:  
+
+Bank:  
+
+Email:  
+
+Account Name:  Z Sithandathu
+
+Account Number:  2345723987
+
+Bank:  Capitec Bank
+
+Email:  sithandathuzipho@gmail.com
+Amount:  20
+Current Currency:  ZAR
+Your Currency:  USD
+You Currency Amount:  1.4
+Account Name:  Z Sithandathu
+
+Account Number:  2372495867
+
+Bank:  Capitec Bank
+
+Email:  sithandathuzipho@gmail.com
+Amount:  20
+Current Currency:  ZAR
+Your Currency:  USD
+You Currency Amount:  1.4

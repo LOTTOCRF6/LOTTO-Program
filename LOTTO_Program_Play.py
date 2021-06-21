@@ -1,6 +1,6 @@
 
-from tkinter import *
 import random
+from tkinter import *
 from tkinter import messagebox
 
 
@@ -11,12 +11,8 @@ def verify():
 root = Tk()
 root.title("National Lotto Draw")
 root.geometry("700x436")
-root.config(background="Grey")
+root.config(background="Gold")
 root.resizable(0, 0)
-
-my_pic = PhotoImage(file = "crf.png")
-background = Label(root, image = my_pic).place(x=0, y=0)
-
 
 play = Label(root, text="Are you ready 'Play'", font=("bold", 15), bg="black", fg="white")
 play.place(x=220, y=10)
@@ -76,6 +72,16 @@ def luck():
     b = num5.get()
     c = num6.get()
 
+    play = open('play.txt', 'r+')
+    play.writelines("No1:" + " " + txt1.get() + "\n")
+    play.writelines("No2:" + " " + txt2.get() + "\n")
+    play.writelines("No3:" + " " + txt3.get() + "\n")
+    play.writelines("N4:" + " " + txt4.get() + "\n")
+    play.writelines("N5:" + " " + txt5.get() + "\n")
+    play.writelines("N6:" + " " + txt6.get() + "\n")
+
+    play.close()
+
     my_list = [int(x), int(y), int(z), int(a), int(b), int(c)]
     my_list.sort()
 
@@ -123,6 +129,12 @@ def luck():
             elif len(same) == 1:
                 messagebox.showinfo("RESULT",
                                     "We are sorry you only got one correct lotto numbers are: " + str(todaylotto))
+                txt1.delete(0, END)
+                txt2.delete(0, END)
+                txt3.delete(0, END)
+                txt4.delete(0, END)
+                txt5.delete(0, END)
+                txt6.delete(0, END)
             elif len(same) == 0:
                 messagebox.showinfo("RESULT", "Try again Lotto numbers : " + str(todaylotto))
                 txt1.delete(0, END)
